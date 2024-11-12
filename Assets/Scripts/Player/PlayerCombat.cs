@@ -49,7 +49,7 @@ public class PlayerCombat : MonoBehaviour
         _playerScript = GetComponent<Player>();
         statsScript = GetComponent<Stats>();
         _animator = GetComponent<Animator>();
-        
+
     }
 
     // Update is called once per frame
@@ -206,7 +206,7 @@ public class PlayerCombat : MonoBehaviour
     private void spawnRangedAttack(GameObject targetedEnemy)
     {
         rangedPrefab.GetComponent<Skill1>().target = targetedEnemy;
-        Instantiate(rangedPrefab, spawnSkill1.transform.position, Quaternion.identity);
-       
+        Instantiate(rangedPrefab, spawnSkill1.transform.position, this.gameObject.transform.rotation);
+
     }
 }

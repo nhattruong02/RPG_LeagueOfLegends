@@ -6,7 +6,6 @@ using UnityEngine;
 public class Skill1 : MonoBehaviour
 {
     [SerializeField] float damage;
-    [SerializeField] int speed;
     public GameObject target;
     // Start is called before the first frame update
     private Stats stats;
@@ -14,17 +13,18 @@ public class Skill1 : MonoBehaviour
     private void OnEnable()
     {
         stats = target.GetComponent<Stats>();
+        stats.TakeDamage(target, damage);
     }
     void Update()
     {
-        if(target != null)
+        if (target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-            if(transform.position == target.transform.position )
-            {
-                stats.TakeDamage(target, damage);
-                Destroy(gameObject);
-            }
+            StartCoroutine(destroyAfterTime());
         }
+    }
+    IEnumerator destroyAfterTime()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(gameObject);
     }
 }
